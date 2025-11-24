@@ -1,25 +1,31 @@
 #include <stdio.h>
+#include <stdlib.h>
 
-float media_vetor(int V[128], int n){
-    int soma = 0;
+float media(int *p, int n){
+    float media = 0;
     for (int i = 0; i < n; i++){
-        soma += V[i];
+       media += p[i]/(n * 1.0); 
     }
-    float media = soma / (n * 1.0);
-
     return media;
 }
 
-
-
 int main(){
     int n;
+    int *p;
     scanf("%d", &n);
-    int V[n];
-    for (int i = 0; i < n; i++){
-        scanf("%d", &V[i]);
+
+    p = malloc(n * sizeof(int));
+    if (p == NULL){
+        printf("Erro de alocacao\n");
+        return 1;
     }
-    printf("Media: %f", media_vetor(V, n));
+    for (int i = 0; i < n; i++){
+        scanf("%d", &p[i]);
+    }
+
+    printf("%f", media(p, n));
+    
+    free(p);
 
     return 0;
 }
